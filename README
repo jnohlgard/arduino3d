@@ -1,0 +1,9 @@
+Arduino3D library
+Copyright Joakim Gebart 2012
+http://github.com/gebart/arduino3d
+
+This is a library for doing some basic 3d rendering on an Arduino connected to
+a graphical lcd (GLCD).
+Currently only the KS0108 chipset is supported. See KS0108.[ch]pp for more information.
+
+The code is released under the GPLv3
