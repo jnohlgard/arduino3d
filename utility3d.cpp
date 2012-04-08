@@ -232,21 +232,21 @@ void Translate(Matrix4f& matrix, const float dx, const float dy, const float dz)
     matrix[i++] = 1.0f;
     matrix[i++] = 0.0f;
     matrix[i++] = 0.0f;
-    matrix[i++] = 0.0f;
+    matrix[i++] = dx;
     // second row
     matrix[i++] = 0.0f;
     matrix[i++] = 1.0f;
     matrix[i++] = 0.0f;
-    matrix[i++] = 0.0f;
+    matrix[i++] = dy;
     // third row
     matrix[i++] = 0.0f;
     matrix[i++] = 0.0f;
     matrix[i++] = 1.0f;
-    matrix[i++] = 0.0f;
-    // fourth row
-    matrix[i++] = dx;
-    matrix[i++] = dy;
     matrix[i++] = dz;
+    // fourth row
+    matrix[i++] = 0.0f;
+    matrix[i++] = 0.0f;
+    matrix[i++] = 0.0f;
     matrix[i++] = 1.0f;
 }
 
