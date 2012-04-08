@@ -7,3 +7,5 @@ a graphical lcd (GLCD).
 Currently only the KS0108 chipset is supported. See KS0108.[ch]pp for more information.
 
 The code is released under the GPLv3
+
+see http://www.youtube.com/watch?v=O4Ome-yqwRY for a video of the library in action.
