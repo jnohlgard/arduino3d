@@ -3,7 +3,7 @@
 
 #include "ArrayM.hpp"
 
-namespace Array
+namespace A3D
 {
 template<typename MyScalar, DimensionType kDimension> class MatrixMxM; // forward declaration
 
@@ -40,5 +40,5 @@ template<typename MyScalar, DimensionType kDimension> class VectorM : public Arr
 typedef VectorM<float, 4> Vector4f;
 typedef VectorM<float, 3> Vector3f;
 
-} // namespace Array
+} // namespace A3D
 #endif

@@ -7,7 +7,7 @@ namespace A3D
 /**
  *
  */
-void Frustum(Array::Matrix4f& matrix, const float left, const float right, const float bottom, const float top, const float near, const float far)
+void Frustum(Matrix4f& matrix, const float left, const float right, const float bottom, const float top, const float near, const float far)
 {
     uint8_t i = 0;
     //~ // First row
@@ -58,7 +58,7 @@ void Frustum(Array::Matrix4f& matrix, const float left, const float right, const
     matrix[i++] = 0.0f;
 }
 
-void Diagonal(Array::Matrix4f& matrix, const float scale)
+void Diagonal(Matrix4f& matrix, const float scale)
 {
     uint8_t i = 0;
     // first row
@@ -95,7 +95,7 @@ void Diagonal(Array::Matrix4f& matrix, const float scale)
     //~ }
 }
 
-void RotateXrad(Array::Matrix4f& matrix, const float radians)
+void RotateXrad(Matrix4f& matrix, const float radians)
 {
     uint8_t i = 0;
     // first row
@@ -120,7 +120,7 @@ void RotateXrad(Array::Matrix4f& matrix, const float radians)
     matrix[i++] = 1.0f;
 }
 
-void RotateYrad(Array::Matrix4f& matrix, const float radians)
+void RotateYrad(Matrix4f& matrix, const float radians)
 {
     uint8_t i = 0;
     // first row
@@ -144,7 +144,7 @@ void RotateYrad(Array::Matrix4f& matrix, const float radians)
     matrix[i++] = 1.0f;
 }
 
-void RotateZrad(Array::Matrix4f& matrix, const float radians)
+void RotateZrad(Matrix4f& matrix, const float radians)
 {
     uint8_t i = 0;
     // first row
@@ -169,7 +169,7 @@ void RotateZrad(Array::Matrix4f& matrix, const float radians)
     matrix[i++] = 1.0f;
 }
 
-void Scale(Array::Matrix4f& matrix, const float scale_x, const float scale_y, const float scale_z)
+void Scale(Matrix4f& matrix, const float scale_x, const float scale_y, const float scale_z)
 {
     uint8_t i = 0;
     // first row
@@ -194,7 +194,7 @@ void Scale(Array::Matrix4f& matrix, const float scale_x, const float scale_y, co
     matrix[i++] = 1.0f;
 }
 
-void Translate(Array::Matrix4f& matrix, const float dx, const float dy, const float dz)
+void Translate(Matrix4f& matrix, const float dx, const float dy, const float dz)
 {
     uint8_t i = 0;
     // first row

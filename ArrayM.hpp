@@ -9,7 +9,7 @@
 #include "WProgram.h"
 #endif
 
-namespace Array
+namespace A3D
 {
 typedef uint8_t DimensionType; // Change this in order to use larger than 256x256 matrices
 typedef uint8_t LengthType; // Change this in order to use larger than 16x16 matrices
@@ -141,5 +141,5 @@ template<typename MyScalar, LengthType kLength> class ArrayM
 
     private:
 };
-} // namespace Array
+} // namespace A3D
 #endif

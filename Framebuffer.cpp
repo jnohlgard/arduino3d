@@ -3,7 +3,7 @@
 #define abs(x) ((x)>0?(x):-(x))
 #endif
 
-namespace Framebuffer
+namespace A3D
 {
 Framebuffer::Framebuffer(FBDimensionType width_, FBDimensionType height_) :
             width(width_),
@@ -106,4 +106,4 @@ void Framebuffer::line(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2, bool colo
         // inverted
     }
 }
-} // namespace Framebuffer
+} // namespace A3D

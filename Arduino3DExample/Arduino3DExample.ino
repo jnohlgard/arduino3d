@@ -1,9 +1,9 @@
 #include <arduino3d.h>
 //~ #include <math.h>
 
-using Array::Matrix4f;
-using Array::Vector4f;
-typedef Framebuffer::KS0108Framebuffer FBDev;
+using A3D::Matrix4f;
+using A3D::Vector4f;
+typedef A3D::KS0108Framebuffer FBDev;
 
 Matrix4f identity;
 Matrix4f ProjectionMatrix;

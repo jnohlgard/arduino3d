@@ -1,6 +1,6 @@
 #include "KS0108.hpp"
 
-namespace Framebuffer
+namespace A3D
 {
 KS0108Framebuffer::KS0108Framebuffer(FBDimensionType width_, FBDimensionType height_) :
     Framebuffer(width_, height_),
@@ -202,4 +202,4 @@ void KS0108Framebuffer::flush()
         waitReady();
     }
 }
-} // namespace Framebuffer
+} // namespace A3D

@@ -9,7 +9,7 @@
 #include "WProgram.h"
 #endif
 
-namespace Array
+namespace A3D
 {
 /// M x M matrix class
 template<typename MyScalar, DimensionType kDimension> class MatrixMxM : public ArrayM<MyScalar, kDimension*kDimension>
@@ -91,5 +91,5 @@ template<typename MyScalar, DimensionType kDimension> class MatrixMxM : public A
 typedef MatrixMxM<float, 4> Matrix4f;
 typedef MatrixMxM<float, 3> Matrix3f;
 
-} // namespace Array
+} // namespace A3D
 #endif

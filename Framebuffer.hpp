@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 
-namespace Framebuffer
+namespace A3D
 {
 
 /// 1 bit per pixel framebuffer
@@ -31,5 +31,5 @@ class Framebuffer
 
         uint8_t data[kSize];
 };
-} // namespace Framebuffer
+} // namespace A3D
 #endif

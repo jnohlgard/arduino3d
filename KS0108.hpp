@@ -10,7 +10,7 @@
 #endif
 
 
-namespace Framebuffer
+namespace A3D
 {
 class KS0108Framebuffer : public Framebuffer
 {
@@ -91,5 +91,5 @@ class KS0108Framebuffer : public Framebuffer
         void init();
         void flush();
 };
-} // namespace Framebuffer
+} // namespace A3D
 #endif

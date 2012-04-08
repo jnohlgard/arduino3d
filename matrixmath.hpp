@@ -4,7 +4,7 @@
 #include "MatrixMxM.hpp"
 #include "VectorM.hpp"
 
-namespace Array
+namespace A3D
 {
 template<typename Scalar, DimensionType kDimension>
 VectorM<Scalar, kDimension> operator*(
@@ -22,5 +22,5 @@ VectorM<Scalar, kDimension> operator*(
     return res;
 }
 
-} // namespace Array
+} // namespace A3D
 #endif
