@@ -266,9 +266,9 @@ void loop(void)
     Serial.print(us);
     Serial.println(" microseconds taken");
     Serial.println("Model to world:");
-    printMatrix4f(ModelWorldMatrix);
+    ModelWorldMatrix.print(Serial);
     Serial.println("World to view:");
-    printMatrix4f(WorldViewMatrix);
+    WorldViewMatrix.print(Serial);
     Serial.println("Draw cube");
     us = micros();
     #endif
