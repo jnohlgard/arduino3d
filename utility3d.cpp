@@ -162,6 +162,7 @@ void RotateYrad(Matrix4f& matrix, const float radians)
     matrix[i++] = 0.0f;
     matrix[i++] = 1.0f;
     matrix[i++] = 0.0f;
+    matrix[i++] = 0.0f;
     // third row
     matrix[i++] = -sin(radians);
     matrix[i++] = 0.0f;
