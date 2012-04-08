@@ -9,7 +9,7 @@ namespace A3D
 /// 1 bit per pixel framebuffer
 class Framebuffer
 {
-    protected:
+    public:
         typedef uint8_t FBDimensionType;
         typedef uint16_t FBLengthType;
 

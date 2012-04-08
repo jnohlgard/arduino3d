@@ -122,35 +122,9 @@ void drawCube(uint8_t index)
         transformed_verts[i] /= transformed_verts[i][3]; // Perspective divide
         //~ Serial.print("Vertex ");
         //~ Serial.println(i);
-        //~ printVector4f(transformed_verts[i]);
+        //~ transformed_verts[i].print(Serial);
     }
-
-    float display_scale_x = static_cast<float>(128/2);
-    float display_scale_y = static_cast<float>(64/2);
-    for (uint8_t side = 0; side < sizeof(cube_indices) / 4; ++side)
-    {
-        Vector4f* v1;
-        Vector4f* v2;
-        uint8_t x1, y1, x2, y2;
-        v1 = &transformed_verts[cube_indices[side*4]];
-        for (uint8_t i = 1; i < 4; ++i)
-        {
-            v2 = &transformed_verts[cube_indices[side*4 + i]];
-            // Device transformation
-            x1 = static_cast<uint8_t>(fma((*v1)[0], display_scale_x, display_scale_x));
-            x2 = static_cast<uint8_t>(fma((*v2)[0], display_scale_x, display_scale_x));
-            y1 = static_cast<uint8_t>(fma((*v1)[1], display_scale_y, display_scale_y));
-            y2 = static_cast<uint8_t>(fma((*v2)[1], display_scale_y, display_scale_y));
-            fb.line(x1, y1, x2, y2, true);
-            v1 = v2;
-        }
-        v1 = &transformed_verts[cube_indices[side*4]];
-        x1 = static_cast<uint8_t>(fma((*v1)[0], display_scale_x, display_scale_x));
-        x2 = static_cast<uint8_t>(fma((*v2)[0], display_scale_x, display_scale_x));
-        y1 = static_cast<uint8_t>(fma((*v1)[1], display_scale_y, display_scale_y));
-        y2 = static_cast<uint8_t>(fma((*v2)[1], display_scale_y, display_scale_y));
-        fb.line(x1, y1, x2, y2, true);
-    }
+    A3D::renderWire(fb, 24, 4, &cube_indices[0], &transformed_verts[0]);
 }
 
 void setup(void)
