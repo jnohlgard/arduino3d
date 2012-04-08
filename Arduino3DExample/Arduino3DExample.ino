@@ -23,27 +23,6 @@ static const uint8_t num_cubes = 5;
 
 FBDev fb(128, 64);
 
-void printMatrix4f(const Array::Matrix4f& m)
-{
-    for (uint8_t y = 0; y < 4; ++y)
-    {
-        for (uint8_t x = 0; x < 4; ++x)
-        {
-            Serial.print(m(y, x));
-            Serial.print('\t');
-        }
-        Serial.println();
-    }
-}
-
-void printVector4f(const Array::Vector4f& v)
-{
-    for (uint8_t i = 0; i < 4; ++i)
-    {
-        Serial.println(v[i]);
-    }
-}
-
 void initCube(void)
 {
     int i=0;

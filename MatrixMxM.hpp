@@ -1,6 +1,14 @@
 #ifndef _ARDUINO3D_MATRIXM_HPP_
 #define _ARDUINO3D_MATRIXM_HPP_
 
+#include "ArrayM.hpp"
+
+#if defined(ARDUINO) && ARDUINO >= 100
+#include "Arduino.h"
+#else
+#include "WProgram.h"
+#endif
+
 namespace Array
 {
 /// M x M matrix class
@@ -63,6 +71,19 @@ template<typename MyScalar, DimensionType kDimension> class MatrixMxM : public A
         //~ {
             //~ return this->values[pos];
         //~ }
+
+        virtual void print(Stream& os)
+        {
+            for (uint8_t y = 0; y < kDimension; ++y)
+            {
+                for (uint8_t x = 0; x < kDimension; ++x)
+                {
+                    os.print((*this)(y, x));
+                    os.print('\t');
+                }
+                os.println();
+            }
+        }
     private:
 
 };

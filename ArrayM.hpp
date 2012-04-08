@@ -1,6 +1,14 @@
 #ifndef _ARDUINO3D_ARRAYM_HPP_
 #define _ARDUINO3D_ARRAYM_HPP_
 
+#include <stdint.h>
+
+#if defined(ARDUINO) && ARDUINO >= 100
+#include "Arduino.h"
+#else
+#include "WProgram.h"
+#endif
+
 namespace Array
 {
 typedef uint8_t DimensionType; // Change this in order to use larger than 256x256 matrices
@@ -121,6 +129,14 @@ template<typename MyScalar, LengthType kLength> class ArrayM
             MyArray res(*this);
             res -= other;
             return res;
+        }
+
+        virtual void print(Stream& os)
+        {
+            for (uint8_t i = 0; i < kLength; ++i)
+            {
+                os.println((*this)[i]);
+            }
         }
 
     private:
