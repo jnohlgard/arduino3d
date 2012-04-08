@@ -58,6 +58,36 @@ void Frustum(Matrix4f& matrix, const float left, const float right, const float 
     matrix[i++] = 0.0f;
 }
 
+/// Set up a parallel projection matrix
+void Ortho(Matrix4f& matrix, const float left, const float right, const float bottom, const float top, const float near, const float far)
+{
+    uint8_t i = 0;
+    // Precalculate some divisions that are used twice
+    float tmp_rl = 1.0f / (right - left);
+    float tmp_tb = 1.0f / (top - bottom);
+    float tmp_nf = 1.0f / (near - far);
+    // First row
+    matrix[i++] = 2.0f * tmp_rl;
+    matrix[i++] = 0.0f;
+    matrix[i++] = 0.0f;
+    matrix[i++] = -(right + left) * tmp_rl;
+    // second row
+    matrix[i++] = 0.0f;
+    matrix[i++] = 2.0f * tmp_tb;
+    matrix[i++] = 0.0f;
+    matrix[i++] = -(top + bottom) * tmp_tb;
+    // third row
+    matrix[i++] = 0.0f;
+    matrix[i++] = 0.0f;
+    matrix[i++] = 2.0f * tmp_nf;
+    matrix[i++] = (far + near) * tmp_nf;
+    // fourth row
+    matrix[i++] = 0.0f;
+    matrix[i++] = 0.0f;
+    matrix[i++] = 0.0f;
+    matrix[i++] = 1.0f;
+}
+
 void Diagonal(Matrix4f& matrix, const float scale)
 {
     uint8_t i = 0;
