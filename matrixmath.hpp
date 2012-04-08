@@ -22,10 +22,5 @@ VectorM<Scalar, kDimension> operator*(
     return res;
 }
 
-
-typedef MatrixMxM<float, 4> Matrix4f;
-typedef MatrixMxM<float, 3> Matrix3f;
-typedef VectorM<float, 4> Vector4f;
-typedef VectorM<float, 3> Vector3f;
 } // namespace Array
 #endif

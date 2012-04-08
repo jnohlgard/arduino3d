@@ -87,5 +87,9 @@ template<typename MyScalar, DimensionType kDimension> class MatrixMxM : public A
     private:
 
 };
+
+typedef MatrixMxM<float, 4> Matrix4f;
+typedef MatrixMxM<float, 3> Matrix3f;
+
 } // namespace Array
 #endif

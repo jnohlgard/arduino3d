@@ -36,5 +36,9 @@ template<typename MyScalar, DimensionType kDimension> class VectorM : public Arr
     private:
 
 };
+
+typedef VectorM<float, 4> Vector4f;
+typedef VectorM<float, 3> Vector3f;
+
 } // namespace Array
 #endif
