@@ -6,6 +6,7 @@ namespace A3D
 {
 
 void Frustum(Matrix4f& matrix, const float left, const float right, const float bottom, const float top, const float near, const float far);
+void Ortho(Matrix4f& matrix, const float left, const float right, const float bottom, const float top, const float near, const float far);
 
 void Diagonal(Matrix4f& matrix, const float scale);
 
