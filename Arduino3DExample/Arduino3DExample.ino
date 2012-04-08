@@ -169,7 +169,6 @@ void setup(void)
     static const float bottom = -1.0f/1.6f;
     A3D::Frustum(ProjectionMatrix, left, right, bottom, top, near, far);
     initRotationStep();
-    fb.line(63, 20, 62, 19, true);
 }
 //~ #define PROFILING
 void loop(void)
