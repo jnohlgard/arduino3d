@@ -17,6 +17,7 @@ extern "C" {
 #include "VectorM.hpp"
 #include "matrixmath.hpp"
 #include "KS0108.hpp"
+#include "utility3d.hpp"
 
 
 #endif

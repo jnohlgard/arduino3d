@@ -73,60 +73,12 @@ void initCube(void)
     cube_indices[i++] = 5;
 }
 
-void initProjection(void)
-{
-    static const float near = 1.0f;
-    static const float far = 10.0f;
-    static const float right = 2.0f/1.6f;
-    static const float left = -2.0f/1.6f;
-    static const float top = 1.0f/1.6f;
-    static const float bottom = -1.0f/1.6f;
-    uint8_t i = 0;
-    // First row
-    ProjectionMatrix[i++] = 2.0f*near/(right-left);
-    ProjectionMatrix[i++] = 0.0f;
-    ProjectionMatrix[i++] = (right+left)/(right-left);
-    ProjectionMatrix[i++] = 0.0f;
-    // second row
-    ProjectionMatrix[i++] = 0.0f;
-    ProjectionMatrix[i++] = 2.0f*near/(top-bottom);
-    ProjectionMatrix[i++] = (top+bottom)/(top-bottom);
-    ProjectionMatrix[i++] = 0.0f;
-    // third row
-    ProjectionMatrix[i++] = 0.0f;
-    ProjectionMatrix[i++] = 0.0f;
-    ProjectionMatrix[i++] = -(far + near)/(far - near);
-    ProjectionMatrix[i++] = -2*far*near/(far - near);
-    // fourth row
-    ProjectionMatrix[i++] = 0.0f;
-    ProjectionMatrix[i++] = 0.0f;
-    ProjectionMatrix[i++] = -1.0f;
-    ProjectionMatrix[i++] = 0.0f;
-}
-
 void initModelView(void)
 {
-    for (uint8_t i = 0; i < 16; ++i)
-    {
-        if (i % 5 == 0)
-        {
-            // Main diagonal
-            ModelWorldMatrix[i] = 1.0f;
-            WorldViewMatrix[i] = 1.0f;
-            ScaleMatrix[i] = 1.0f;
-            MoveMatrix[i] = 1.0f;
-        }
-        else
-        {
-            ModelWorldMatrix[i] = 0.0f;
-            WorldViewMatrix[i] = 0.0f;
-            ScaleMatrix[i] = 0.0f;
-            MoveMatrix[i] = 0.0f;
-        }
-    }
-
-    WorldViewMatrix[11] = -6.0f; // move cube away from camera
-    MoveMatrix[11] = -3.0f; // move cube away from camera
+    A3D::Identity(ModelWorldMatrix);
+    A3D::Translate(WorldViewMatrix, 0.0f, 0.0f, -6.0f); // move cube away from camera
+    A3D::Identity(ScaleMatrix);
+    A3D::Translate(MoveMatrix, 0.0f, 0.0f, -3.0f); // move cube away from camera
 }
 
 void initRotationStep(void)
@@ -135,46 +87,11 @@ void initRotationStep(void)
     static const float ystep = 1.0f/61.0f;
     static const float zstep = 1.0f/37.0f;
     static const float rotoffset = TWO_PI/static_cast<float>(num_cubes);
-    for (uint8_t i = 0; i < 16; ++i)
-    {
-        if (i % 5 == 0)
-        {
-            // Main diagonal
-            RotationXMatrix[i] = 1.0f;
-            RotationYMatrix[i] = 1.0f;
-            RotationZMatrix[i] = 1.0f;
-            RotationOffsetMatrix[i] = 1.0f;
-        }
-        else
-        {
-            RotationXMatrix[i] = 0.0f;
-            RotationYMatrix[i] = 0.0f;
-            RotationZMatrix[i] = 0.0f;
-            RotationOffsetMatrix[i] = 0.0f;
-        }
-    }
-    // Rotate around X
-    RotationXMatrix[5] = cos(xstep);
-    RotationXMatrix[6] = -sin(xstep);
-    RotationXMatrix[9] = sin(xstep);
-    RotationXMatrix[10] = cos(xstep);
-    // Rotate around Y
-    RotationYMatrix[0] = cos(ystep);
-    RotationYMatrix[2] = sin(ystep);
-    RotationYMatrix[8] = -sin(ystep);
-    RotationYMatrix[10] = cos(ystep);
-    // Rotate around Z
-    RotationZMatrix[0] = cos(zstep);
-    RotationZMatrix[1] = -sin(zstep);
-    RotationZMatrix[4] = sin(zstep);
-    RotationZMatrix[5] = cos(zstep);
 
-    // Rotate around Y
-    RotationOffsetMatrix[0] = cos(rotoffset);
-    RotationOffsetMatrix[2] = sin(rotoffset);
-    RotationOffsetMatrix[8] = -sin(rotoffset);
-    RotationOffsetMatrix[10] = cos(rotoffset);
-
+    A3D::RotateXrad(RotationXMatrix, xstep);
+    A3D::RotateYrad(RotationYMatrix, ystep);
+    A3D::RotateZrad(RotationZMatrix, zstep);
+    A3D::RotateYrad(RotationOffsetMatrix, rotoffset);
 
     RotationMatrix = RotationXMatrix * RotationYMatrix * RotationZMatrix;
 }
@@ -244,7 +161,13 @@ void setup(void)
     fb.flush();
     initCube();
     initModelView();
-    initProjection();
+    static const float near = 1.0f;
+    static const float far = 10.0f;
+    static const float right = 2.0f/1.6f;
+    static const float left = -2.0f/1.6f;
+    static const float top = 1.0f/1.6f;
+    static const float bottom = -1.0f/1.6f;
+    A3D::Frustum(ProjectionMatrix, left, right, bottom, top, near, far);
     initRotationStep();
     fb.line(63, 20, 62, 19, true);
 }
