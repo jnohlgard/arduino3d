@@ -106,4 +106,58 @@ void Framebuffer::line(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2, bool colo
         // inverted
     }
 }
+
+void Framebuffer::blit(uint8_t x0, uint8_t y0, const uint8_t buffer_width, const uint8_t buffer_height, const uint8_t* buf)
+{
+    if (buffer_height == 0 || buffer_width == 0)
+    {
+        return;
+    }
+    uint8_t yshifts = y0 % 8; // if y0 is not a multiple of 8 we need to shift the data bytes some bits
+
+    uint8_t ysbound = (buffer_height - 1) / 8 + 1; // calculate source buffer bound
+    uint8_t ytbound = (height - 1) / 8 + 1; // calculate framebuffer bound
+    uint8_t yt = y0 / 8; // position in framebuffer
+    uint8_t ys = 0; // position in source buffer
+    while (ys < ysbound && yt < ytbound)
+    {
+        uint8_t source_mask = 0xFF; // rowmask defines which bit rows are blitted
+        if ((ys+1)*8 > buffer_height)
+        {
+            // partial byte row needs to mask some pixel rows
+            source_mask >>= ((ys+1)*8 - buffer_height);
+        }
+        uint16_t target_mask = ~(source_mask << yshifts);
+        uint8_t upper_target_mask = ((target_mask & 0xFF00) >> 8);
+        uint8_t lower_target_mask = ((target_mask & 0xFF) >> 0);
+
+        // if the target rectangle is unaligned with the framebuffer's byte rows
+        // we will need to split the data somewhere and do two writes to the FB
+        uint8_t xt = x0; // position in framebuffer
+        uint8_t xs = 0; // position in source buffer
+        while (xs < buffer_width && xt < width)
+        {
+            // source buffer data for upper part of this row
+            uint16_t blit_data =
+                ((buf[xs + ys * buffer_width] & source_mask) << yshifts);
+                //~ ((0xff & source_mask) << yshifts);
+            uint8_t upper_byte = ((blit_data & 0xFF00) >> 8);
+            uint8_t lower_byte = ((blit_data & 0xFF) >> 0);
+            lower_byte |= (data[xt + yt * width] & lower_target_mask); // target buffer data that should be unaffected by the blit
+            data[xt + yt * width] = lower_byte;
+            //~ data[xt + yt * width] = 0x55;
+
+            if (yt + 1 < ytbound && upper_target_mask != 0xff)
+            {
+                upper_byte |= (data[xt + (yt+1) * width] & upper_target_mask); // target buffer data that should be unaffected by the blit
+                data[xt + (yt+1) * width] = upper_byte;
+                //~ data[xt + (yt+1) * width] = 0x00;
+            }
+            ++xt; // increment target x position
+            ++xs; // increment source x position
+        }
+        ++yt;
+        ++ys;
+    }
+}
 } // namespace A3D

@@ -29,6 +29,9 @@ class Framebuffer
         /// Bresenham's line drawing algorithm
         virtual void line(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2, bool color);
 
+        /// copy a block into framebuffer at arbitrary non divide-by-8 y position
+        virtual void blit(uint8_t x0, uint8_t y0, const uint8_t buffer_width, const uint8_t buffer_height, const uint8_t* buf);
+
         uint8_t data[kSize];
 };
 } // namespace A3D
